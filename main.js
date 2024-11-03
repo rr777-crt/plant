@@ -102,8 +102,6 @@ function mining(scorePerSec , price) {
     
 }
     
-function music() {
-    if (score > 500) {
-       // button.style. = 'url(https://klev.club/uploads/posts/2023-11/1698878136_klev-club-p-arti-gorokhostrel-zombi-43.jpg)'
-    }
-}
+
+    
+

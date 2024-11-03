@@ -1,0 +1,167 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Задание</title>
+        <meta name="description" content="Пример задания">
+        <link rel="stylesheet" href="style.css" type="text/css">
+    </head>
+    <body>
+        <header>
+            <div>
+                капель (воды): <b id="score">0</b>
+            </div>
+            <div>
+                За клик +<b id="add">1</b>
+            </div>
+             <div>
+                жизнь <b id="pop">0</b>
+            </div>
+        </header>
+        <main>
+            <div id="button">
+            </div>
+        </main>
+        <footer>
+            <button id="add-2">
+                <span>+2 за клик</span>
+                100 капель
+            </button>
+
+            <button id="add-5">
+                <span>+5 за клик</span>
+                235 капель
+            </button>
+
+            <button id="add-10">
+                <span>+10 за клик</span>
+                1250 хомяков
+            </button>
+
+            <button id="add-20">
+                <span>+20 за клик</span>
+                1850 капель
+            </button>
+
+            <button id="add-50">
+                <span>+50 за клик</span>
+                5000 капель
+            </button>
+
+            <button id="add-200">
+                <span>+200 за клик</span>
+                12000 капель
+            </button>
+            <button id="min-1">
+                <span>+1 в сек</span>
+                100 капель
+            </button>
+            <button id="min-10">
+                <span>+10 в сек</span>
+                500 капель
+            </button>
+             <button id="min-100">
+                <span>+100 в сек</span>
+                5000 капель
+            </button>
+             <button id="min-1000">
+                <span>+1000 в сек</span>
+                50000 капель
+            </button>
+            <button id="min-1000">
+                <span>музыка 1</span>
+                500 капель
+            </button>
+
+
+        </footer>
+    </body>
+    <script>
+        'use strict'
+        const scoreText = document.getElementById("score")
+        const addText = document.getElementById("add")
+        const button = document.getElementById("button")
+
+        const btnAdd2 = document.getElementById("add-2")
+        const btnAdd5 = document.getElementById("add-5")
+        const btnAdd10 = document.getElementById("add-10")
+        const btnAdd20 = document.getElementById("add-20")
+        const btnAdd50 = document.getElementById("add-50")
+        const btnAdd200 = document.getElementById("add-200")
+        const btnAddm1 = document.getElementById("min-1")
+         const btnAddm10 = document.getElementById("min-10")
+          const btnAddm100 = document.getElementById("min-100")
+          const btnAddm1000 = document.getElementById("min-1000")
+        
+        
+
+        let score = 0
+        let add = 1
+
+        button.onclick = getClick
+
+        btnAdd2.onclick = () => getClickAdd(2, 100)
+        btnAdd5.onclick = () => getClickAdd(5, 235)
+        btnAdd10.onclick = () => getClickAdd(10, 1250)
+        btnAdd20.onclick = () => getClickAdd(20, 1850)
+        btnAdd50.onclick = () => getClickAdd(50, 5000)
+        btnAdd200.onclick = () => getClickAdd(200, 12000)
+         btnAddm1.onclick = () => mining(1, 100)
+          btnAddm10.onclick = () => mining(10, 500)
+          btnAddm100.onclick = () => mining(100, 5000)
+          btnAddm1000.onclick = () => mining(1000, 50000)
+        
+         
+
+
+        function getClick(n) {
+            if ( Number.isInteger(n) ) score += n
+            else score += add
+            scoreText.innerText = score
+
+            checkBGImage()
+        }
+
+        function getClickAdd(n, price) {
+            if (score < price) return
+
+            score -= price
+            scoreText.innerText = score
+            
+            add = n
+            addText.innerText = add
+        }
+
+        function checkBGImage() {
+            if (score > 1000) {
+                button.style.backgroundImage = 'url(https://klev.club/uploads/posts/2023-11/1698878136_klev-club-p-arti-gorokhostrel-zombi-43.jpg)'
+            }
+            
+            if (score > 10000) {
+                button.style.backgroundImage = 'url(https://pvsz2.ru/statics/plants-big/31.png)'
+            }
+             if (score > 1000000) {
+                button.style.backgroundImage = 'url(https://avatars.mds.yandex.net/i?id=69a2b4239be746c0863ff1d2bf2c2a75_l-8972142-images-thumbs&n=13)'
+            }
+             if (score > 100000000) {
+                button.style.backgroundImage = 'url(https://i.pinimg.com/originals/8e/0f/57/8e0f5777b6643cdc67dcfce5db6c1d70.jpg)'
+            }
+            if (score > 1000000000000) {
+                button.style.backgroundImage = 'url(https://avatars.mds.yandex.net/i?id=d39205f173fac3d831222a6d9a3ee2cd_l-10878141-images-thumbs&n=13)'
+            }
+        }
+        function mining(scorePerSec , price) {
+            if (score > price) {
+                score -= price
+                scoreText.innerText = score
+                setInterval( getClick, 1000, scorePerSec)
+            }
+            
+            }
+            function music() {
+            if (score > 500) {
+                button.style. = 'url(https://klev.club/uploads/posts/2023-11/1698878136_klev-club-p-arti-gorokhostrel-zombi-43.jpg)'
+            }
+            
+        
+    </script>
+</html>

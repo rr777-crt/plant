@@ -15,6 +15,7 @@ const btnAddm100 = document.getElementById("min-100")
 const btnAddm1000 = document.getElementById("min-1000")
 
 let isLoadingReady = false
+console.log('v', '001')
 
 const musicList = [
   'Grasswalk.mp3',

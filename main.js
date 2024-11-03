@@ -14,6 +14,26 @@ const btnAddm10 = document.getElementById("min-10")
 const btnAddm100 = document.getElementById("min-100")
 const btnAddm1000 = document.getElementById("min-1000")
 
+let isLoadingReady = false
+
+const musicList = [
+  'Grasswalk.mp3',
+ 
+]
+const MUSIC = {}
+let loadCount = 0
+musicList.forEach((m, i) => {
+   const music = new Audio()
+   music.src = m
+   MUSIC[m] = music
+   music.oncanplaythrough = (e) => {
+    e.target.oncanplaythrough = null
+    loadCount++
+    if (loadCount === musicList.length) isLoadingReady = true 
+   }
+})
+
+
 let score = 0
 let add = 1
 
@@ -37,6 +57,10 @@ function getClick(n) {
     scoreText.innerText = score
 
     checkBGImage()
+    if (isLoadingReady && score>= 500) {
+     isLoadingReady = false
+     MUSIC['Grasswalk.mp3'].play()
+    }
 }
 
 function getClickAdd(n, price) {

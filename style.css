@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: blueviolet;
+    height: 40px;
+    text-align: center;
+    font-size: 24px;
+}
+
+header div {
+    display: inline-block;
+    margin: 5px 25px;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: calc(100vh - 100px);
+    width: 100vw;
+
+}
+
+#button {
+    width: 220px;
+    height:  220px;
+    border-radius: 100%;
+    background-image: url(https://pvsz2.ru/statics/plants-big/68.png);
+    background-position: center;
+    background-size: 78%;
+    background-repeat: no-repeat;
+    filter: hue-rotate(5deg);
+    border: 12px solid rgb(171, 233, 0);
+    box-shadow: 0 12px 12px black;
+    cursor: pointer;
+}
+
+#button:active {
+    filter: hue-rotate(45deg);
+    transform: translateY(-10px);
+    
+}
+
+footer {
+    background-color: blueviolet;
+    height: 60px;
+    text-align: center;
+    font-size: 24px;
+}
+
+footer button {
+    margin-top: 10px;
+    border-radius: 12px;
+}
+
+footer button span {
+    display: block;
+    font-size: 18px;
+}

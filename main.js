@@ -59,7 +59,7 @@ function getClick(n) {
     scoreText.innerText = score
 
     checkBGImage()
-    if (isLoadingReady && score>= 20) {
+    if (isLoadingReady && score>= 500) {
      isLoadingReady = false
      MUSIC['Grasswalk.mp3'].play()
     }

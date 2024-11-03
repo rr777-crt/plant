@@ -29,7 +29,8 @@ musicList.forEach((m, i) => {
    music.oncanplaythrough = (e) => {
     e.target.oncanplaythrough = null
     loadCount++
-    if (loadCount === musicList.length) isLoadingReady = true 
+    if (loadCount === musicList.length) isLoadingReady = true
+     console.log('isLoadingReady', isLoadingReady)
    }
 })
 
@@ -57,7 +58,7 @@ function getClick(n) {
     scoreText.innerText = score
 
     checkBGImage()
-    if (isLoadingReady && score>= 500) {
+    if (isLoadingReady && score>= 20) {
      isLoadingReady = false
      MUSIC['Grasswalk.mp3'].play()
     }

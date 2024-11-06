@@ -2,7 +2,7 @@
 const scoreText = document.getElementById("score")
 const addText = document.getElementById("add")
 const button = document.getElementById("button")
-const buttoni = document.getElementById("addi")
+
 
 
 const btnAdd2 = document.getElementById("add-2")
@@ -18,7 +18,6 @@ const btnAddm1000 = document.getElementById("min-1000")
 const btnAdd1000 = document.getElementById("add-1000")
 const btnAdd50000 = document.getElementById("add-50000")
 const btnAddm10000 = document.getElementById("min-50000")
-const btnAddi1 = document.getElementById("addi-0.000001")
 
 let isLoadingReady = false
 console.log('v', '001')
@@ -60,7 +59,7 @@ btnAddm1000.onclick = () => mining(1000, 50000)
 btnAdd1000.onclick = () => getClickAdd(1000, 100000)
 btnAdd50000.onclick = () => getClickAdd(500000, 10000000)
 btnAddm10000.onclick = () => mining(10000, 500000)
-btnAddi1.onclick = () => getClickAddi(0.000001, 1)
+
 
  
 function getClick(n) {
@@ -110,17 +109,7 @@ function mining(scorePerSec , price) {
         setInterval( getClick, 1000, scorePerSec)
     }
 }
-      function getClickAddi(p, price) {
-    if (score < price) return
-
-    score -= price
-    scoreText.innerText = score
-    
-    add = p
-    addText.innerText = add
-    }
-    
-}
+      
     
 
     

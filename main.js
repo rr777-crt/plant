@@ -2,7 +2,7 @@
 const scoreText = document.getElementById("score")
 const addText = document.getElementById("add")
 const button = document.getElementById("button")
-const button = document.getElementById("addi")
+const buttoni = document.getElementById("addi")
 
 
 const btnAdd2 = document.getElementById("add-2")
@@ -108,6 +108,8 @@ function mining(scorePerSec , price) {
         score -= price
         scoreText.innerText = score
         setInterval( getClick, 1000, scorePerSec)
+    }
+}
       function getClickAddi(p, price) {
     if (score < price) return
 

@@ -108,6 +108,14 @@ function mining(scorePerSec , price) {
         score -= price
         scoreText.innerText = score
         setInterval( getClick, 1000, scorePerSec)
+      function getClickAddi(p, price) {
+    if (score < price) return
+
+    score -= price
+    scoreText.innerText = score
+    
+    add = p
+    addText.innerText = add
     }
     
 }

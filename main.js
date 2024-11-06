@@ -2,7 +2,7 @@
 const scoreText = document.getElementById("score")
 const addText = document.getElementById("add")
 const button = document.getElementById("button")
-const addText = document.getElementById("add2")
+const addText = document.getElementById("addi")
 
 const btnAdd2 = document.getElementById("add-2")
 const btnAdd5 = document.getElementById("add-5")
@@ -17,6 +17,7 @@ const btnAddm1000 = document.getElementById("min-1000")
 const btnAdd1000 = document.getElementById("add-1000")
 const btnAdd50000 = document.getElementById("add-50000")
 const btnAddm10000 = document.getElementById("min-50000")
+const btnAdd = document.getElementById("add2-0.000001")
 
 let isLoadingReady = false
 console.log('v', '001')

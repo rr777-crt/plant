@@ -59,7 +59,7 @@ btnAddm1000.onclick = () => mining(1000, 50000)
 btnAdd1000.onclick = () => getClickAdd(1000, 100000)
 btnAdd50000.onclick = () => getClickAdd(500000, 10000000)
 btnAddm10000.onclick = () => mining(10000, 500000)
-btnAddi000001.onclick = () => getClickAdd(0.000001, 1)
+btnAddi000001.onclick = () => getClickAddi(0.000001, 1)
 
  
 function getClick(n) {

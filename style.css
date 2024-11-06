@@ -32,9 +32,9 @@ main {
     border-radius: 100%;
     background-image: url(https://pvsz2.ru/statics/plants-big/68.png);
     background-position: center;
-    background-size: 78%;
+    background-size: 79%;
     background-repeat: no-repeat;
-    filter: hue-rotate(5deg);
+    filter: hue-rotate(1deg);
     border: 12px solid rgb(171, 233, 0);
     box-shadow: 0 12px 12px black;
     cursor: pointer;

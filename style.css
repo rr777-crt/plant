@@ -41,8 +41,8 @@ main {
 }
 
 #button:active {
-    filter: hue-rotate(5deg);
-    transform: translateY(-5px);
+    filter: hue-rotate(45deg);
+    transform: translateY(-10px);
     
 }
 
@@ -61,4 +61,8 @@ footer button {
 footer button span {
     display: block;
     font-size: 18px;
+}
+footer button span {
+    display: block;
+    font-size: 20px;
 }

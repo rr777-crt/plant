@@ -59,10 +59,7 @@ footer button {
 }
 
 footer button span {
+    background-image: url (https://steamuserimages-a.akamaihd.net/ugc/26235308963966581/DB9B16361F19B407DF5A638F38262AA55BB25F47/);
     display: block;
     font-size: 18px;
-}
-footer button span {
-    display: block;
-    font-size: 20px;
 }

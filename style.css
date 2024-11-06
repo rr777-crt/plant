@@ -42,7 +42,7 @@ main {
 
 #button:active {
     filter: hue-rotate(45deg);
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     
 }
 

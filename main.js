@@ -2,6 +2,7 @@
 const scoreText = document.getElementById("score")
 const addText = document.getElementById("add")
 const button = document.getElementById("button")
+const addText = document.getElementById("add2")
 
 const btnAdd2 = document.getElementById("add-2")
 const btnAdd5 = document.getElementById("add-5")

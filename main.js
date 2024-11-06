@@ -100,7 +100,7 @@ function checkBGImage() {
      if (score > 100000000) {
         button.style.backgroundImage = 'url(https://i.pinimg.com/originals/8e/0f/57/8e0f5777b6643cdc67dcfce5db6c1d70.jpg)'
     }
-    if (score > 100000000000) {
+    if (score > 1000000000) {
         button.style.backgroundImage = 'url(https://avatars.mds.yandex.net/i?id=d39205f173fac3d831222a6d9a3ee2cd_l-10878141-images-thumbs&n=13)'
     }
 }

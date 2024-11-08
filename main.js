@@ -91,7 +91,7 @@ function getClickAdd(n, price) {
 }
 
 function checkBGImage() {
-   if (score > 10) {
+   if (score > 1) {
         button.style.backgroundImage = 'url(https://i.ytimg.com/vi/V0JjDBJEotQ/maxresdefault.jpg)'
     }
     if (score > 1000) {

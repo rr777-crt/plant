@@ -12,7 +12,7 @@ header {
 
 header div {
     display: inline-block;
-    margin: 5px 22px;
+    margin: 7px 22px;
 }
 
 main {
@@ -29,7 +29,7 @@ main {
 #button {
     width: 220px;
     height:  220px;
-    border-radius: 100%;
+    border-radius: 95%;
     background-image: url(https://pvsz2.ru/statics/plants-big/68.png);
     background-position: center;
     background-size: 79%;
@@ -42,7 +42,7 @@ main {
 
 #button:active {
     filter: hue-rotate(45deg);
-    transform: translateY(-10px);
+    transform: translateY(-1px);
     
 }
 

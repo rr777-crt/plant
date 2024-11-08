@@ -92,7 +92,7 @@ function getClickAdd(n, price) {
 
 function checkBGImage() {
    if (score > 1) {
-        button.style.backgroundImage = 'url(https://i.ytimg.com/vi/V0JjDBJEotQ/maxresdefault.jpg)'
+        button.style.backgroundImage = 'url(https://avatars.mds.yandex.net/i?id=7fac6f1a7984b8f6c4b5404a998cdf145dd4bc36-4739197-images-thumbs&n=13)'
     }
     if (score > 1000) {
         button.style.backgroundImage = 'url(https://klev.club/uploads/posts/2023-11/1698878136_klev-club-p-arti-gorokhostrel-zombi-43.jpg)'

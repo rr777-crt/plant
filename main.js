@@ -19,7 +19,7 @@ const btnAdd1000 = document.getElementById("add-1000")
 const btnAdd50000 = document.getElementById("add-50000")
 const btnAddm10000 = document.getElementById("min-50000")
 const btnAddm25000 = document.getElementById("min-150000")
-const btnAddm100000 = document.getElementById("min-1000000")
+const btnAddm100000 = document.getElementById("min-100000")
 const btnAdd100000 = document.getElementById("add-100000")
 
 

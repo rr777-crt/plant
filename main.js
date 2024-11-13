@@ -22,6 +22,8 @@ const btnAddm25000 = document.getElementById("min-150000")
 const btnAddm100000 = document.getElementById("min-100000")
 const btnAdd100000 = document.getElementById("add-100000")
 const btnAdd666 = document.getElementById("add-666")
+const btnAddm1000000 = document.getElementById("min-1000000")
+
 
 
 let isLoadingReady = false
@@ -66,8 +68,9 @@ btnAdd50000.onclick = () => getClickAdd(500000, 10000000)
 btnAddm10000.onclick = () => mining(10000, 500000)
 btnAddm25000.onclick = () => mining(25000, 1500000)
 btnAddm100000.onclick = () => mining(100000, 10000000)
-btnAdd100000.onclick = () => mining(1000000, 100000000)
-btnAdd666.onclick = () => mining(https://rr777-crt.github.io/666die666/, 6)
+btnAdd100000.onclick = () => getClickAdd(1000000, 100000000)
+btnAdd666.onclick = () =>getClickAdd(666, 666666)
+btnAdd1000000.onclick = () =>getClickAdd(1000000, 100000000)
 
  
 function getClick(n) {
@@ -108,6 +111,9 @@ function checkBGImage() {
         button.style.backgroundImage = 'url(https://i.pinimg.com/originals/8e/0f/57/8e0f5777b6643cdc67dcfce5db6c1d70.jpg)'
     }
   if (score > 100000000000) {
+        button.style.backgroundImage = 'url(https://img.razrisyika.ru/kart/14/1200/53948-gorohostrel-13.jpg)'
+    }
+   if (score > 6666666666666) {
         button.style.backgroundImage = 'url(https://img.razrisyika.ru/kart/14/1200/53948-gorohostrel-13.jpg)'
     }
 }

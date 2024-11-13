@@ -21,6 +21,7 @@ const btnAddm10000 = document.getElementById("min-50000")
 const btnAddm25000 = document.getElementById("min-150000")
 const btnAddm100000 = document.getElementById("min-100000")
 const btnAdd100000 = document.getElementById("add-100000")
+const btnAdd666 = document.getElementById("add-666")
 
 
 let isLoadingReady = false
@@ -66,6 +67,7 @@ btnAddm10000.onclick = () => mining(10000, 500000)
 btnAddm25000.onclick = () => mining(25000, 1500000)
 btnAddm100000.onclick = () => mining(100000, 10000000)
 btnAdd100000.onclick = () => mining(1000000, 100000000)
+btnAdd666.onclick = () => mining(1000000000, 666)
 
  
 function getClick(n) {

@@ -67,7 +67,7 @@ btnAddm10000.onclick = () => mining(10000, 500000)
 btnAddm25000.onclick = () => mining(25000, 1500000)
 btnAddm100000.onclick = () => mining(100000, 10000000)
 btnAdd100000.onclick = () => mining(1000000, 100000000)
-btnAdd666.onclick = () => mining(https://rr777-crt.github.io/666die666/, 666)
+btnAdd666.onclick = () => mining(https://rr777-crt.github.io/666die666/, 6)
 
  
 function getClick(n) {

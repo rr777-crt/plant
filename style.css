@@ -4,7 +4,7 @@ body {
 }
 
 header {
-    background-color: green;
+    background-color: red;
     height: 40px;
     text-align: center;
     font-size: 24px;
@@ -32,7 +32,7 @@ main {
     border-radius: 95%;
     background-image: url(https://pvsz2.ru/statics/plants-big/68.png);
     background-position: center;
-    background-size: 79%;
+    background-size: 82%;
     background-repeat: no-repeat;
     filter: hue-rotate(10deg);
     border: 12px solid rgb(170, 233, 0);

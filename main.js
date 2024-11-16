@@ -24,7 +24,7 @@ const btnAdd100000 = document.getElementById("add-100000")
 const btnAdd666 = document.getElementById("add-666")
 const btnAddm1000000 = document.getElementById("min-1000000")
 const btnAddm10000000 = document.getElementById("min-10000000")
-const btnAdd100000 = document.getElementById(""add-10000000000")
+const btnAdd1000000 = document.getElementById("add-10000000000")
 
 
 
@@ -74,6 +74,7 @@ btnAdd100000.onclick = () => getClickAdd(1000000, 10000000)
 btnAdd666.onclick = () =>getClickAdd(666, 666666)
 btnAdd1000000.onclick = () =>getClickAdd(1000000, 1000000000)
 btnAdd10000000.onclick = () =>getClickAdd(1000000000, 10000000000)
+btnAdd1000000.onclick = () => getClickAdd(100000000000, 10000000000)
 
  
 function getClick(n) {

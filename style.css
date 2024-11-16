@@ -4,7 +4,7 @@ ucc  body {
 }
 
 header {
-    background-color: red;
+    background-color: orange;
     height: 40px;
     text-align: center;
     font-size: 24px;
@@ -47,7 +47,7 @@ main {
 }
 
 footer {
-    background-color: lightgreen;
+    background-color: yellow;
     height: 102px;
     text-align: center;
     font-size: 44px;

@@ -24,7 +24,7 @@ const btnAdd100000 = document.getElementById("add-100000")
 const btnAdd666 = document.getElementById("add-666")
 const btnAddm1000000 = document.getElementById("min-1000000")
 const btnAddm10000000 = document.getElementById("min-10000000")
-const btnAdd100000 = document.getElementById("add-100000")
+const btnAdd100000 = document.getElementById(""add-10000000000")
 
 
 

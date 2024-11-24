@@ -3,7 +3,7 @@
         <meta charset="UTF-8">
         <title>грохострел v:1.0.0.4</title>
         <meta name="description" content="грохострел">
-        <link rel="stylesheet" href="style.css" type="text/css">
+        <link rel="stylesheet" href="./style.css" type="text/css">
     </head>
     <body>
         <header>
@@ -14,7 +14,7 @@
                 За клик +<b id="add">1</b>
             </div>
              <div>
-                солнцы: <b id="addi"></b>
+                солнцы: <b id="suns">0</b>
             </div>
         </header>
         <main>
@@ -22,90 +22,21 @@
             </div>
         </main>
         <footer>
-            <button id="add-2">
+            <button onclick="getClickAdd(2, 100)">
                 <span>+2 за клик</span>
                 100 капель
             </button>
 
-            <button id="add-5">
-                <span>+5 за клик</span>
-                235 капель
-            </button>
-
-            <button id="add-10">
-                <span>+10 за клик</span>
-                1250 капель
-            </button>
-
-            <button id="add-20">
-                <span>+20 за клик</span>
-                1850 капель
-            </button>
-
-            <button id="add-50">
-                <span>+50 за клик</span>
-                5000 капель
-            </button>
-
-            <button id="add-200">
-                <span>+200 за клик</span>
-                12000 капель
-            </button>
-            <button id="min-1">
+            <button onclick="mining(1 , 100)">
                 <span>+1 в сек</span>
                 100 капель
             </button>
-            <button id="min-10">
-                <span>+10 в сек</span>
-                500 капель
+
+            <button onclick="getScoreForSuns(120, 1)">
+                <span>+ 120</span>
+                за 1 солнце
             </button>
-             <button id="min-100">
-                <span>+100 в сек</span>
-                5000 капель
-            </button>
-             <button id="min-1000">
-                <span>+1000 в сек</span>
-                50000 капель
-            </button>
-            <button id="add-1000">
-                <span>+1000 за клик</span>
-                100000 капель
-            </button>
-            <button id="add-50000">
-             <span>+50000 за клик</span>
-                10000000 капель
-            </button>
-             <button id="min-10000">
-            <span>+10000 в сек</span>
-                500000 капель
-            </button>
-  <button id="min-25000">
-            <span>+25000 в сек</span>
-                1500000 капель
-            </button>  
-             <button id="min-100000">
-            <span>+100000 в сек</span>
-                100000000 капель
-            </button>
-               <button id="add-1000000">
-            <span>+1000000 за клик</span>
-                100000000 капель
-            </button>  
-             <button id="add-666">
-            <span>???</span>
-            </button>
-             <button id="min-1000000">
-            <span>+1000000 в сек</span>
-                1000000000 капель
-            </button>
-            <button id="min-10000000">
-            <span>ИНДЕЙКА</span>
-                
-            </button>
-            <button id="add-10000000000">
-            <span>СОК</span>
-                
-            </button>
+
             
     <p>V:ALPHA 1.0.0.4</p>
         <p> - обновление скоро</p>

@@ -2,32 +2,7 @@
 const scoreText = document.getElementById("score")
 const addText = document.getElementById("add")
 const button = document.getElementById("button")
-const buttoni = document.getElementById("addi")
-
-
-
-const btnAdd2 = document.getElementById("add-2")
-const btnAdd5 = document.getElementById("add-5")
-const btnAdd10 = document.getElementById("add-10")
-const btnAdd20 = document.getElementById("add-20")
-const btnAdd50 = document.getElementById("add-50")
-const btnAdd200 = document.getElementById("add-200")
-const btnAddm1 = document.getElementById("min-1")
-const btnAddm10 = document.getElementById("min-10")
-const btnAddm100 = document.getElementById("min-100")
-const btnAddm1000 = document.getElementById("min-1000")
-const btnAdd1000 = document.getElementById("add-1000")
-const btnAdd50000 = document.getElementById("add-50000")
-const btnAddm10000 = document.getElementById("min-50000")
-const btnAddm25000 = document.getElementById("min-150000")
-const btnAddm100000 = document.getElementById("min-100000")
-const btnAdd100000 = document.getElementById("add-100000")
-const btnAdd666 = document.getElementById("add-666")
-const btnAddm1000000 = document.getElementById("min-1000000")
-const btnAddm10000000 = document.getElementById("min-10000000")
-const btnAdd1000000 = document.getElementById("add-10000000000")
-
-
+const sunsDiv = document.getElementById("suns")
 
 let isLoadingReady = false
 console.log('v', '001')
@@ -52,36 +27,17 @@ musicList.forEach((m, i) => {
 
 
 let score = 0
-let add = 1
+let addPerClick = 1
+let addPerSecond = 0
+
+let suns = 0
+let addSuns = 0.1
 
 button.onclick = getClick
 
-btnAdd2.onclick = () => getClickAdd(2, 100)
-btnAdd5.onclick = () => getClickAdd(5, 235)
-btnAdd10.onclick = () => getClickAdd(10, 1250)
-btnAdd20.onclick = () => getClickAdd(20, 1850)
-btnAdd50.onclick = () => getClickAdd(50, 5000)
-btnAdd200.onclick = () => getClickAdd(200, 12000)
-btnAddm1.onclick = () => mining(1, 100)
-btnAddm10.onclick = () => mining(10, 500)
-btnAddm100.onclick = () => mining(100, 5000)
-btnAddm1000.onclick = () => mining(1000, 50000)
-btnAdd1000.onclick = () => getClickAdd(1000, 100000)
-btnAdd50000.onclick = () => getClickAdd(500000, 10000000)
-btnAddm10000.onclick = () => mining(10000, 500000)
-btnAddm25000.onclick = () => mining(25000, 1500000)
-btnAddm100000.onclick = () => mining(100000, 10000000)
-btnAdd100000.onclick = () => getClickAdd(1000000, 10000000)
-btnAdd666.onclick = () =>getClickAdd(666, 666666)
-btnAdd1000000.onclick = () =>getClickAdd(1000000, 1000000000)
-btnAdd10000000.onclick = () =>getClickAdd(1000000000, 10000000000)
-btnAdd1000000.onclick = () => getClickAdd(100000000000, 10000000000)
-
- 
-function getClick(n) {
-    if ( Number.isInteger(n) ) score += n
-    else score += add
-    scoreText.innerText = score
+function getClick() {
+    getScore(addPerClick)
+    getSuns(addSuns)
 
     checkBGImage()
     if (isLoadingReady && score>= 500) {
@@ -90,14 +46,39 @@ function getClick(n) {
     }
 }
 
+function getScore(n) {
+    score += n
+    scoreText.innerText = score
+}
+
+function getSuns(n) {
+    suns += n
+    sunsDiv.innerText = suns.toFixed(2)
+}
+
 function getClickAdd(n, price) {
     if (score < price) return
 
-    score -= price
-    scoreText.innerText = score
+    getScore(-price)
     
-    add = n
-    addText.innerText = add
+    addPerClick = n
+    addText.innerText = addPerClick
+}
+
+function mining(scorePerSec , price) {
+    if (score < price) return
+
+    getScore(-price)
+    addPerSecond += scorePerSec
+
+    console.log(scorePerSec , price, addPerSecond)
+}
+ 
+function getScoreForSuns(score_n, suns_n) {
+    if (suns < suns_n) return
+
+    getScore(score_n)
+    getSuns(-suns_n)
 }
 
 function checkBGImage() {
@@ -125,19 +106,8 @@ function checkBGImage() {
         button.style.backgroundImage = 'url(https://img.razrisyika.ru/kart/14/1200/53948-gorohostrel-13.jpg)'
     }
 }
-function mining(scorePerSec , price) {
-    if (score > price) {
-        score -= price
-        scoreText.innerText = score
-        setInterval( getClick, 1000, scorePerSec)
-    }
-}
-function getClick(n) {
-    if ( Number.isInteger(n) ) score += n
-    else score += addi
-    scoreText.innerText = score
-}
-   
 
-    
-
+setInterval( () => {
+    getScore(addPerSecond)
+    console.log('tick')
+}, 1000)

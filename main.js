@@ -31,7 +31,7 @@ let addPerClick = 1
 let addPerSecond = 0
 
 let suns = 0
-let addSuns = 0.1
+let addSuns = 0.10
 
 button.onclick = getClick
 

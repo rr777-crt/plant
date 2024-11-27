@@ -1,4 +1,4 @@
-'use strict'
+,'use strict'
 const scoreText = document.getElementById("score")
 const addText = document.getElementById("add")
 const button = document.getElementById("button")
@@ -40,7 +40,7 @@ function getClick() {
     getSuns(addSuns)
 
     checkBGImage()
-    if (isLoadingReady && score>= 500) {
+    if (isLoadingReady && score>= 125) {
      isLoadingReady = false
      MUSIC['Grasswalk.mp3'].play()
     }

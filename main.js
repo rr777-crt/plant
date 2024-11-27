@@ -40,7 +40,7 @@ function getClick() {
     getSuns(addSuns)
 
     checkBGImage()
-    if (isLoadingReady && score>= 125) {
+    if (isLoadingReady && score>= 500) {
      isLoadingReady = false
      MUSIC['Grasswalk.mp3'].play()
     }

@@ -4,7 +4,7 @@ body {
 }
 
 header {
-    background-color: green;
+    background-color: white;
     height: 40px;
     text-align: center;
     font-size: 24px;
@@ -46,16 +46,16 @@ main {
 }
 
 #button:active {
-    filter: hue-rotate(45deg);
-    transform: translateY(-5px);
+    filter: hue-rotate(49deg);
+    transform: translateY(-7px);
     
 }
 
 footer {
     background-color: green;
-    height: 102px;
+    height: 100px;
     text-align: center;
-    font-size: 44px;
+    font-size: 100px;
 }
 
 footer button {
@@ -66,5 +66,5 @@ footer button {
 
 footer button span {
     display: block;
-    font-size: 35px;
+    font-size: 30px;
 }

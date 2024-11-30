@@ -1,4 +1,4 @@
-'use strict'
+'use script'
 const scoreText = document.getElementById("score")
 const addText = document.getElementById("add")
 const button = document.getElementById("button")

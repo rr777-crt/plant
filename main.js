@@ -26,7 +26,7 @@ musicList.forEach((m, i) => {
 })
 
 
-let score = 1
+let score = 0
 let addPerClick = 1
 let addPerSecond = 0
 
@@ -56,14 +56,6 @@ function getSuns(n) {
     sunsDiv.innerText = suns.toFixed(2)
 }
 
-function getClickAdd(n, price) {
-    if (score < price) return
-
-    getScore(-price)
-    
-    addPerClick = n
-    addText.innerText = addPerClick
-}
 
 function mining(scorePerSec , price) {
     if (score < price) return

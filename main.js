@@ -55,6 +55,14 @@ function getSuns(n) {
     suns += n
     sunsDiv.innerText = suns.toFixed(2)
 }
+function getClickAdd(n, price) {
+    if (score < price) return
+
+    getScore(-price)
+    
+    addPerClick = n
+    addText.innerText = addPerClick
+}
 
 
 function mining(scorePerSec , price) {

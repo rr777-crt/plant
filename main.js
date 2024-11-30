@@ -26,7 +26,7 @@ musicList.forEach((m, i) => {
 })
 
 
-let score = 0
+let score = 1
 let addPerClick = 1
 let addPerSecond = 0
 

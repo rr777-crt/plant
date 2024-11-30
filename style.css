@@ -53,9 +53,9 @@ main {
 
 footer {
     background-color: green;
-    height: 135px;
+    height: 100px;
     text-align: center;
-    font-size: 140px;
+    font-size: 100px;
 }
 
 footer button {

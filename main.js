@@ -80,6 +80,7 @@ function getScoreForSuns(score_n, suns_n) {
     getScore(score_n)
     getSuns(-suns_n)
 }
+*/function notbuy*/
 
 
 function checkBGImage() {

@@ -71,12 +71,12 @@ footer button span {
 .groho{
     width: 320px;
     height:  320px;
-    border-radius: 5%;
+    border-radius: 1%;
     background-image: url(https://pvsz2.ru/statics/plants-big/68.png);
     background-position: center;
     background-size: 22%;
     background-repeat: no-repeat;
-    filter: hue-rotate(25deg);
+    filter: hue-rotate(100deg);
     border: 12px solid rgb(170, 233, 0);
     box-shadow: 0 22px 12px blue;
     cursor: pointer;

@@ -80,17 +80,7 @@ function getScoreForSuns(score_n, suns_n) {
     getScore(score_n)
     getSuns(-suns_n)
 }
-function miningSun(scorePerSec , price) {
-    if (score < price) return
-   if (suns < suns_n) return
 
-    getScore(-price)
-  getScore(score_n)
-    getSuns(-suns_n)
-    addPerSecond += scorePerSecSun
-
-    console.log(scorePerSec , price, addPerSecond)
-}
 
 function checkBGImage() {
 

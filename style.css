@@ -76,7 +76,7 @@ footer button span {
     background-position: center;
     background-size: 22%;
     background-repeat: no-repeat;
-    filter: hue-rotate(100deg);
+    filter: hue-rotate(10deg);
     border: 12px solid rgb(170, 233, 0);
     box-shadow: 0 22px 12px blue;
     cursor: pointer;

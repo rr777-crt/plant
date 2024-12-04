@@ -25,7 +25,7 @@ header {
 
 header div {
     display: inline-block;
-    margin: 10px 22px;
+    margin: 15px 25px;
 }
 
 main {
@@ -40,9 +40,9 @@ main {
 }
 
 #button {
-    width: 220px;
-    height:  220px;
-    border-radius: 99%;
+    width: 250px;
+    height:  250px;
+    border-radius: 91%;
     background-image: url(https://pvsz2.ru/statics/plants-big/68.png);
     background-position: center;
     background-size: 82%;
@@ -77,16 +77,16 @@ footer button span {
     font-size: 30px;
 }
 .groho{
-    width: 320px;
+    width: 460px;
     height:  320px;
-    border-radius: 1%;
+    border-radius: 10%;
     background-image: url(https://pvsz2.ru/statics/plants-big/68.png);
     background-position: center;
     background-size: 22%;
     background-repeat: no-repeat;
-    filter: hue-rotate(10deg);
-    border: 12px solid rgb(170, 233, 0);
-    box-shadow: 0 22px 12px blue;
+    filter: hue-rotate(12deg);
+    border: 18px solid rgb(170, 233, 0);
+    box-shadow: 0 22px 22px blue;
     cursor: pointer;
 }
     

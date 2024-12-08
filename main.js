@@ -30,7 +30,7 @@ let score = 0
 let addPerClick = 1
 let addPerSecond = 0
 
-let suns = 10000
+let suns = 0
 let addSuns = 0.01
 
 button.onclick = getClick

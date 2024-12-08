@@ -85,7 +85,7 @@ function getScoreForSuns(score_n, suns_n) {
 
 function checkBGImage() {
 
-   if (score > 1) {
+   if (score > 10) {
         button.style.backgroundImage = 'url(https://png.klev.club/uploads/posts/2024-04/png-klev-club-f8lu-p-gorokhostrel-png-20.png)'
     }
   

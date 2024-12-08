@@ -31,7 +31,7 @@ let addPerClick = 1
 let addPerSecond = 0
 
 let suns = 0
-let addSuns = 0.01
+let addSuns = 1000
 
 button.onclick = getClick
 
@@ -85,9 +85,7 @@ function getScoreForSuns(score_n, suns_n) {
 
 function checkBGImage() {
 
-   if (score > 100) {
-        button.style.backgroundImage = 'url(https://png.klev.club/uploads/posts/2024-04/png-klev-club-f8lu-p-gorokhostrel-png-20.png)'
-    }
+   
   
     if (score > 1000) {
         button.style.backgroundImage = 'url(https://klev.club/uploads/posts/2023-11/1698878136_klev-club-p-arti-gorokhostrel-zombi-43.jpg)'
@@ -108,7 +106,9 @@ function checkBGImage() {
   if (score > 100000000000) {
         button.style.backgroundImage = 'url(https://img.razrisyika.ru/kart/14/1200/53948-gorohostrel-13.jpg)'
     }
-  
+  if (score > 1000000000000) {
+        button.style.backgroundImage = 'url(https://png.klev.club/uploads/posts/2024-04/png-klev-club-f8lu-p-gorokhostrel-png-20.png)'
+    }
   
 }
 

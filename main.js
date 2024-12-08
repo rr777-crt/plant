@@ -109,9 +109,7 @@ function checkBGImage() {
         button.style.backgroundImage = 'url(https://img.razrisyika.ru/kart/14/1200/53948-gorohostrel-13.jpg)'
     }
   
-   if (score > 66666666666666666666666){
-        button.style.backgroundImage = 'url(https://img.razrisyika.ru/kart/14/1200/53948-gorohostrel-13.jpg)'
-    }
+  
 }
 
 setInterval( () => {

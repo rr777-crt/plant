@@ -12,7 +12,7 @@ const musicList = [
  
 ]
 const MUSIC = {}
-let loadCount = 0
+let loadCount = 5
 musicList.forEach((m, i) => {
    const music = new Audio()
    music.src = m

@@ -4,6 +4,34 @@ const addText = document.getElementById("add")
 const button = document.getElementById("button")
 const sunsDiv = document.getElementById("suns")
 
+let casePrice = 1; // Цена кейса, можно изменить
+
+// Добавьте эту функцию где-нибудь среди других функций
+function buyCase() {
+    if (score < casePrice) {
+        alert("Недостаточно капель для покупки кейса!");
+        return;
+    }
+    
+    getScore(-casePrice); // Вычитаем стоимость кейса
+    
+    const random = Math.random() * 100; // Генерируем случайное число от 0 до 100
+    
+    if (random <= 50) { // 50% шанс
+        getScore(900);
+        alert("Вы получили 900 капель!");
+    } else if (random <= 80) { // 30% шанс (50-80)
+        getSuns(5);
+        alert("Вы получили 5 солнц!");
+    } else if (random <= 95) { // 15% шанс (80-95)
+        getScore(1000000);
+        alert("ВЫ ВЫИГРАЛИ ДЖЕКПОТ! 1,000,000 капель!");
+    } else { // 5% шанс (95-100)
+        getSuns(100);
+        alert("МЕГАУДАЧА! 100 солнц!!!");
+    }
+}
+
 let isLoadingReady = false
 console.log('v', '001')
 

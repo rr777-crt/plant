@@ -26,6 +26,33 @@ function buyCase() {
         alert("МЕГАУДАЧА! 100 солнц!!!");
     }
 }
+let casePrice = 1000000000; // Цена кейса, можно изменить
+
+// Добавьте эту функцию где-нибудь среди других функций
+function buyCase() {
+    if (score < casePrice) {
+        alert("Недостаточно капель для покупки кейса!");
+        return;
+    }
+    
+    getScore(-casePrice); // Вычитаем стоимость кейса
+    
+    const random = Math.random() * 100; // Генерируем случайное число от 0 до 100
+    
+    if (random <= 50) { // 50% шанс
+        getScore(800000000);
+        alert("Вы получили 80000000000 капель!");
+    } else if (random <= 80) { // 30% шанс (50-80)
+        getSuns(50);
+        alert("Вы получили 50 солнц!");
+    } else if (random <= 95) { // 15% шанс (80-95)
+        getScore(1000000000000000);
+        alert("ВЫ ВЫИГРАЛИ ДЖЕКПОТ! 1,000,000,000,000,000 капель!");
+    } else { // 5% шанс (95-100)
+        getSuns(1000);
+        alert("МЕГАУДАЧА! 1000 солнц!!!");
+    }
+}
 const scoreText = document.getElementById("score")
 const addText = document.getElementById("add")
 const button = document.getElementById("button")
@@ -143,4 +170,54 @@ setInterval( () => {
     getScore(addPerSecond)
     console.log('tick')
 }, 1000)
+let isButtonPressed = false;
+let pressStartTime = 0;
+const longPressDuration = 5000; 
 
+
+button.onmousedown = function() {
+    isButtonPressed = true;
+    pressStartTime = Date.now();
+    console.log("Кнопка нажата");
+    
+    
+    let longPressCheck = setInterval(() => {
+        if (!isButtonPressed) {
+            clearInterval(longPressCheck);
+            return;
+        }
+        
+        let pressDuration = Date.now() - pressStartTime;
+        
+       
+        if (pressDuration >= longPressDuration) {
+            clearInterval(longPressCheck);
+            
+          
+            getScore(10);
+            getSuns(0.1); 
+            
+           
+            button.style.border = "12px solid gold";
+            button.style.boxShadow = "0 12px 12px gold";
+            
+           
+            setTimeout(() => {
+                button.style.border = "12px solid rgb(170, 233, 0)";
+                button.style.boxShadow = "0 12px 12px black";
+            }, 1000);
+            
+            console.log("Долгое нажатие - бонус получен!");
+        }
+    }, 100);
+};
+
+
+button.onmouseup = function() {
+    isButtonPressed = false;
+    console.log("Кнопка отпущена");
+};
+
+
+button.ontouchstart = button.onmousedown;
+button.ontouchend = button.onmouseup;

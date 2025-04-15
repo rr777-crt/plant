@@ -154,7 +154,7 @@ function saveGame() {
         addPerSecond: addPerSecond,
         suns: suns,
         addSuns: addSuns,
-        casePrice: casePrice // если вы используете переменную для цены кейса
+        casePrice: casePrice 
     };
     localStorage.setItem('groxostrelSave', JSON.stringify(gameData));
 }
@@ -171,7 +171,7 @@ function loadGame() {
         addSuns = gameData.addSuns || 0.01;
         casePrice = gameData.casePrice || 1000;
         
-        // Обновляем отображение
+      
         scoreText.innerText = score;
         addText.innerText = addPerClick;
         sunsDiv.innerText = suns.toFixed(2);
@@ -180,17 +180,17 @@ function loadGame() {
     }
 }
 
-// Модифицируем все функции, изменяющие состояние игры:
+
 function getScore(n) {
     score += n;
     scoreText.innerText = score;
-    saveGame(); // Сохраняем после изменения
+    saveGame(); 
 }
 
 function getSuns(n) {
     suns += n;
     sunsDiv.innerText = suns.toFixed(2);
-    saveGame(); // Сохраняем после изменения
+    saveGame();
 }
 
 function getClickAdd(n, price) {
@@ -199,7 +199,7 @@ function getClickAdd(n, price) {
     getScore(-price);
     addPerClick = n;
     addText.innerText = addPerClick;
-    saveGame(); // Сохраняем после изменения
+    saveGame(); 
 }
 
 function mining(scorePerSec, price) {
@@ -207,7 +207,7 @@ function mining(scorePerSec, price) {
 
     getScore(-price);
     addPerSecond += scorePerSec;
-    saveGame(); // Сохраняем после изменения
+    saveGame();
 }
 
 function getScoreForSuns(score_n, suns_n) {
@@ -215,7 +215,7 @@ function getScoreForSuns(score_n, suns_n) {
 
     getScore(score_n);
     getSuns(-suns_n);
-    saveGame(); // Сохраняем после изменения
+    saveGame(); 
 }
 
 function buyCase() {
@@ -225,16 +225,34 @@ function buyCase() {
     }
     
     getScore(-casePrice);
-    saveGame(); // Сохраняем сразу после списания
+    saveGame();
     
-    // ... остальной код функции buyCase ...
-    // Не забудьте добавить saveGame() после каждого изменения состояния
+   
 }
 
-// Добавляем автоматическую загрузку при старте игры
+
 window.addEventListener('load', function() {
     loadGame();
     
-    // Автосохранение каждые 30 секунд
+  
     setInterval(saveGame, 30000);
 });
+function resetGame() {
+    if (confirm("Вы уверены, что хотите сбросить весь прогресс? Это нельзя отменить!")) {
+        localStorage.removeItem('groxostrelSave');
+        location.reload();
+    }
+}
+function checkBGImage() {
+  
+    saveGame();
+}
+function loadGame() {
+    const savedData = localStorage.getItem('groxostrelSave');
+    if (savedData) {
+      
+        alert('Прогресс успешно загружен!');
+    } else {
+        console.log('Сохранение не найдено, начинаем новую игру');
+    }
+}

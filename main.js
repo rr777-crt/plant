@@ -1,187 +1,88 @@
-'use strict'
+'use script'
+const scoreText = document.getElementById("score")
+const addText = document.getElementById("add")
+const button = document.getElementById("button")
+const sunsDiv = document.getElementById("suns")
+
+let isLoadingReady = false
+console.log('v', '001')
+
+const musicList = [
+  'Grasswalk.mp3',
+ 
+]
+const MUSIC = {}
+let loadCount = 5
+musicList.forEach((m, i) => {
+   const music = new Audio()
+   music.src = m
+   MUSIC[m] = music
+   music.oncanplaythrough = (e) => {
+    e.target.oncanplaythrough = null
+    loadCount++
+    if (loadCount === musicList.length) isLoadingReady = true
+     console.log('isLoadingReady', isLoadingReady)
+   }
+})
 
 
-const scoreText = document.getElementById("score");
-const addText = document.getElementById("add");
-const button = document.getElementById("button");
-const sunsDiv = document.getElementById("suns");
+let score = 0
+let addPerClick = 1
+let addPerSecond = 0
 
+let suns = 0
+let addSuns = 0.01
 
-let score = 0;
-let addPerClick = 1;
-let addPerSecond = 0;
-let suns = 0;
-let addSuns = 0.01;
+button.onclick = getClick
 
+function getClick() {
+    getScore(addPerClick)
+    getSuns(addSuns)
 
-
-let isButtonPressed = false;
-let pressStartTime = 0;
-const longPressDuration = 5000;
-
-
-const musicList = ['Grasswalk.mp3'];
-const MUSIC = {};
-let isLoadingReady = false;
-
-
-function saveGame() {
-    const gameData = {
-        score: score,
-        addPerClick: addPerClick,
-        addPerSecond: addPerSecond,
-        suns: suns,
-        addSuns: addSuns
-    };
-    localStorage.setItem('groxostrelSave', JSON.stringify(gameData));
-}
-
-
-function loadGame() {
-    const savedData = localStorage.getItem('groxostrelSave');
-    if (savedData) {
-        const gameData = JSON.parse(savedData);
-        score = gameData.score || 0;
-        addPerClick = gameData.addPerClick || 1;
-        addPerSecond = gameData.addPerSecond || 0;
-        suns = gameData.suns || 0;
-        addSuns = gameData.addSuns || 0.01;
-        updateUI();
+    checkBGImage()
+    if (isLoadingReady && score>= 500) {
+     isLoadingReady = false
+     MUSIC['Grasswalk.mp3'].play()
     }
-}
-
-function updateUI() {
-    scoreText.innerText = Math.floor(score);
-    addText.innerText = addPerClick;
-    sunsDiv.innerText = suns.toFixed(2);
 }
 
 function getScore(n) {
-    score += n;
-    updateUI();
-    saveGame();
+    score += n
+    scoreText.innerText = score
 }
 
 function getSuns(n) {
-    suns += n;
-    updateUI();
-    saveGame();
+    suns += n
+    sunsDiv.innerText = suns.toFixed(2)
 }
-
 function getClickAdd(n, price) {
-    if (score >= price) {
-        score -= price;
-        addPerClick = n;
-        updateUI();
-        saveGame();
-    }
+    if (score < price) return
+
+    getScore(-price)
+    
+    addPerClick = n
+    addText.innerText = addPerClick
 }
 
-function mining(scorePerSec, price) {
-    if (score >= price) {
-        score -= price;
-        addPerSecond += scorePerSec;
-        updateUI();
-        saveGame();
-    }
-}
 
+function mining(scorePerSec , price) {
+    if (score < price) return
+
+    getScore(-price)
+    addPerSecond += scorePerSec
+
+    console.log(scorePerSec , price, addPerSecond)
+}
+ 
 function getScoreForSuns(score_n, suns_n) {
-    if (suns >= suns_n) {
-        score += score_n;
-        suns -= suns_n;
-        updateUI();
-        saveGame();
-    }
+    if (suns < suns_n) return
+
+    getScore(score_n)
+    getSuns(-suns_n)
 }
 
 
-function buyCase() {
-    if (score < casePrice) {
-        alert("Недостаточно капель для покупки кейса!");
-        return;
-    }
-    
-    score -= casePrice;
-    updateUI();
-    
-    const random = Math.random() * 100;
-    let rewardMessage = "";
-    
-    if (random <= 50) {
-        score += 900;
-        rewardMessage = "Вы получили 900 капель!";
-    } else if (random <= 80) {
-        suns += 5;
-        rewardMessage = "Вы получили 5 солнц!";
-    } else if (random <= 95) {
-        score += 1000000;
-        rewardMessage = "ДЖЕКПОТ! 1,000,000 капель!";
-    } else {
-        suns += 100;
-        rewardMessage = "МЕГАУДАЧА! 100 солнц!!!";
-    }
-    
-    updateUI();
-    saveGame();
-    alert(rewardMessage);
-}
 
-
-button.onmousedown = function() {
-    isButtonPressed = true;
-    pressStartTime = Date.now();
-    
-    let longPressCheck = setInterval(() => {
-        if (!isButtonPressed) {
-            clearInterval(longPressCheck);
-            return;
-        }
-        
-        if (Date.now() - pressStartTime >= longPressDuration) {
-            clearInterval(longPressCheck);
-            getScore(10);
-            
-            button.style.border = "12px solid gold";
-            button.style.boxShadow = "0 12px 12px gold";
-            
-            setTimeout(() => {
-                button.style.border = "12px solid rgb(170, 233, 0)";
-                button.style.boxShadow = "0 12px 12px black";
-            }, 1000);
-        }
-    }, 100);
-};
-
-button.onmouseup = function() {
-    isButtonPressed = false;
-};
-
-
-setInterval(() => {
-    if (addPerSecond > 0) {
-        getScore(addPerSecond);
-    }
-}, 1000);
-
-
-window.addEventListener('load', function() {
-
-    musicList.forEach((m, i) => {
-        const music = new Audio();
-        music.src = m;
-        MUSIC[m] = music;
-        music.oncanplaythrough = (e) => {
-            e.target.oncanplaythrough = null;
-            console.log('Музыка загружена');
-        };
-    });
-    
-    loadGame();
-    
-
-    setInterval(saveGame, 30000);
-});
 function checkBGImage() {
 
    
@@ -210,3 +111,8 @@ function checkBGImage() {
     }
   
 }
+
+setInterval( () => {
+    getScore(addPerSecond)
+    console.log('tick')
+}, 1000)

@@ -147,3 +147,94 @@ setInterval( () => {
 let isButtonPressed = false;
 let pressStartTime = 0;
 const longPressDuration = 5000; 
+function saveGame() {
+    const gameData = {
+        score: score,
+        addPerClick: addPerClick,
+        addPerSecond: addPerSecond,
+        suns: suns,
+        addSuns: addSuns,
+        casePrice: casePrice // если вы используете переменную для цены кейса
+    };
+    localStorage.setItem('groxostrelSave', JSON.stringify(gameData));
+}
+
+function loadGame() {
+    const savedData = localStorage.getItem('groxostrelSave');
+    if (savedData) {
+        const gameData = JSON.parse(savedData);
+        
+        score = gameData.score || 0;
+        addPerClick = gameData.addPerClick || 1;
+        addPerSecond = gameData.addPerSecond || 0;
+        suns = gameData.suns || 0;
+        addSuns = gameData.addSuns || 0.01;
+        casePrice = gameData.casePrice || 1000;
+        
+        // Обновляем отображение
+        scoreText.innerText = score;
+        addText.innerText = addPerClick;
+        sunsDiv.innerText = suns.toFixed(2);
+        
+        console.log('Игра загружена!');
+    }
+}
+
+// Модифицируем все функции, изменяющие состояние игры:
+function getScore(n) {
+    score += n;
+    scoreText.innerText = score;
+    saveGame(); // Сохраняем после изменения
+}
+
+function getSuns(n) {
+    suns += n;
+    sunsDiv.innerText = suns.toFixed(2);
+    saveGame(); // Сохраняем после изменения
+}
+
+function getClickAdd(n, price) {
+    if (score < price) return;
+
+    getScore(-price);
+    addPerClick = n;
+    addText.innerText = addPerClick;
+    saveGame(); // Сохраняем после изменения
+}
+
+function mining(scorePerSec, price) {
+    if (score < price) return;
+
+    getScore(-price);
+    addPerSecond += scorePerSec;
+    saveGame(); // Сохраняем после изменения
+}
+
+function getScoreForSuns(score_n, suns_n) {
+    if (suns < suns_n) return;
+
+    getScore(score_n);
+    getSuns(-suns_n);
+    saveGame(); // Сохраняем после изменения
+}
+
+function buyCase() {
+    if (score < casePrice) {
+        alert("Недостаточно капель для покупки кейса!");
+        return;
+    }
+    
+    getScore(-casePrice);
+    saveGame(); // Сохраняем сразу после списания
+    
+    // ... остальной код функции buyCase ...
+    // Не забудьте добавить saveGame() после каждого изменения состояния
+}
+
+// Добавляем автоматическую загрузку при старте игры
+window.addEventListener('load', function() {
+    loadGame();
+    
+    // Автосохранение каждые 30 секунд
+    setInterval(saveGame, 30000);
+});

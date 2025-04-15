@@ -1,21 +1,11 @@
 'use strict';
 
-const scoreText = document.getElementById("score");
-const addText = document.getElementById("add");
-const button = document.getElementById("button");
-const sunsDiv = document.getElementById("suns");
 
 let isLoadingReady = false;
 let isButtonPressed = false;
 let pressStartTime = 0;
 const longPressDuration = 5000;
 
-let score = 0;
-let addPerClick = 1;
-let addPerSecond = 0;
-let suns = 0;
-let addSuns = 0.01;
-const casePrice = 1000;
 
 // Функция сохранения игры
 function saveGame() {

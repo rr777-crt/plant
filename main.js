@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 
 const scoreText = document.getElementById("score");

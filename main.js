@@ -29,7 +29,7 @@ function buyCase() {
 let casePrice = 1000000000; // Цена кейса, можно изменить
 
 // Добавьте эту функцию где-нибудь среди других функций
-function buyCase() {
+function buyCaseone() {
     if (score < casePrice) {
         alert("Недостаточно капель для покупки кейса!");
         return;

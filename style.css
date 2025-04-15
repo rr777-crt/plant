@@ -89,6 +89,11 @@ footer button span {
     box-shadow: 0 22px 22px blue;
     cursor: pointer;
 }
-    
+
+.golden-button {
+    border: 12px solid gold !important;
+    box-shadow: 0 12px 12px gold !important;
+    transition: all 0.3s ease;
+}
 
     

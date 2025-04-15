@@ -12,7 +12,7 @@ let addPerClick = 1;
 let addPerSecond = 0;
 let suns = 0;
 let addSuns = 0.01;
-const casePrice = 1000;
+
 
 
 let isButtonPressed = false;

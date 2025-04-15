@@ -1,12 +1,12 @@
 'use strict';
 
-// Элементы интерфейса
+
 const scoreText = document.getElementById("score");
 const addText = document.getElementById("add");
 const button = document.getElementById("button");
 const sunsDiv = document.getElementById("suns");
 
-// Состояние игры
+
 let score = 0;
 let addPerClick = 1;
 let addPerSecond = 0;
@@ -14,17 +14,17 @@ let suns = 0;
 let addSuns = 0.01;
 const casePrice = 1000;
 
-// Для долгого нажатия
+
 let isButtonPressed = false;
 let pressStartTime = 0;
 const longPressDuration = 5000;
 
-// Музыка (из вашего оригинала)
+
 const musicList = ['Grasswalk.mp3'];
 const MUSIC = {};
 let isLoadingReady = false;
 
-// Функция сохранения
+
 function saveGame() {
     const gameData = {
         score: score,
@@ -36,7 +36,7 @@ function saveGame() {
     localStorage.setItem('groxostrelSave', JSON.stringify(gameData));
 }
 
-// Функция загрузки
+
 function loadGame() {
     const savedData = localStorage.getItem('groxostrelSave');
     if (savedData) {
@@ -50,14 +50,12 @@ function loadGame() {
     }
 }
 
-// Обновление интерфейса
 function updateUI() {
     scoreText.innerText = Math.floor(score);
     addText.innerText = addPerClick;
     sunsDiv.innerText = suns.toFixed(2);
 }
 
-// Основные функции из вашего оригинала (с добавлением saveGame())
 function getScore(n) {
     score += n;
     updateUI();
@@ -97,7 +95,7 @@ function getScoreForSuns(score_n, suns_n) {
     }
 }
 
-// Функция кейсов (как вы просили)
+
 function buyCase() {
     if (score < casePrice) {
         alert("Недостаточно капель для покупки кейса!");
@@ -129,7 +127,7 @@ function buyCase() {
     alert(rewardMessage);
 }
 
-// Долгое нажатие (как вы просили)
+
 button.onmousedown = function() {
     isButtonPressed = true;
     pressStartTime = Date.now();
@@ -159,16 +157,16 @@ button.onmouseup = function() {
     isButtonPressed = false;
 };
 
-// Автоматическая добыча
+
 setInterval(() => {
     if (addPerSecond > 0) {
         getScore(addPerSecond);
     }
 }, 1000);
 
-// Загрузка игры при старте
+
 window.addEventListener('load', function() {
-    // Загрузка музыки (из вашего оригинала)
+
     musicList.forEach((m, i) => {
         const music = new Audio();
         music.src = m;
@@ -181,7 +179,7 @@ window.addEventListener('load', function() {
     
     loadGame();
     
-    // Автосохранение каждые 30 секунд
+
     setInterval(saveGame, 30000);
 });
 function checkBGImage() {

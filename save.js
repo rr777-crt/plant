@@ -1,112 +1,92 @@
 'use strict';
 
-
-let isLoadingReady = false;
-let isButtonPressed = false;
-let pressStartTime = 0;
-const longPressDuration = 5000;
-
-
-// Функция сохранения игры
-function saveGame() {
-    const gameData = {
-        score: score,
-        addPerClick: addPerClick,
-        addPerSecond: addPerSecond,
-        suns: suns,
-        addSuns: addSuns
-    };
-    localStorage.setItem('groxostrelSave', JSON.stringify(gameData));
-}
-
-// Функция загрузки игры
-function loadGame() {
-    const savedData = localStorage.getItem('groxostrelSave');
-    if (savedData) {
-        const gameData = JSON.parse(savedData);
+// Save System
+const saveSystem = {
+    // Функция для сохранения данных
+    saveGame: function() {
+        const gameData = {
+            score: score,
+            addPerClick: addPerClick,
+            addPerSecond: addPerSecond,
+            suns: suns,
+            addSuns: addSuns,
+            casePrice: casePrice,
+            casePriceo: casePriceo
+        };
         
-        score = gameData.score || 0;
-        addPerClick = gameData.addPerClick || 1;
-        addPerSecond = gameData.addPerSecond || 0;
-        suns = gameData.suns || 0;
-        addSuns = gameData.addSuns || 0.01;
-        
-        updateUI();
-    }
-}
-
-function updateUI() {
-    scoreText.innerText = score;
-    addText.innerText = addPerClick;
-    sunsDiv.innerText = suns.toFixed(2);
-}
-
-// Функция кейса (исправленная)
-function buyCase() {
-    if (score < casePrice) {
-        alert("Недостаточно капель для покупки кейса!");
-        return;
-    }
+        localStorage.setItem('plantClickerSave', JSON.stringify(gameData));
+        console.log('Игра сохранена');
+    },
     
-    score -= casePrice;
-    updateUI();
-    
-    const random = Math.random() * 100;
-    let rewardMessage = "";
-    
-    if (random <= 50) {
-        score += 900;
-        rewardMessage = "Вы получили 900 капель!";
-    } else if (random <= 80) {
-        suns += 5;
-        rewardMessage = "Вы получили 5 солнц!";
-    } else if (random <= 95) {
-        score += 1000000;
-        rewardMessage = "ДЖЕКПОТ! 1,000,000 капель!";
-    } else {
-        suns += 100;
-        rewardMessage = "МЕГАУДАЧА! 100 солнц!!!";
-    }
-    
-    updateUI();
-    saveGame();
-    alert(rewardMessage);
-}
-
-// Остальные функции (getScore, getSuns и т.д.) оставляем как были,
-// но добавляем saveGame() в конце каждой
-
-button.onmousedown = function() {
-    isButtonPressed = true;
-    pressStartTime = Date.now();
-    
-    let longPressCheck = setInterval(() => {
-        if (!isButtonPressed) {
-            clearInterval(longPressCheck);
-            return;
-        }
-        
-        if (Date.now() - pressStartTime >= longPressDuration) {
-            clearInterval(longPressCheck);
-            score += 10;
-            updateUI();
-            saveGame();
+    // Функция для загрузки данных
+    loadGame: function() {
+        const savedData = localStorage.getItem('plantClickerSave');
+        if (savedData) {
+            const gameData = JSON.parse(savedData);
             
-            button.style.border = "12px solid gold";
-            button.style.boxShadow = "0 12px 12px gold";
+            // Восстанавливаем значения
+            score = gameData.score || 0;
+            addPerClick = gameData.addPerClick || 1;
+            addPerSecond = gameData.addPerSecond || 0;
+            suns = gameData.suns || 0;
+            addSuns = gameData.addSuns || 0.01;
+            casePrice = gameData.casePrice || 1;
+            casePriceo = gameData.casePriceo || 2;
             
-            setTimeout(() => {
-                button.style.border = "12px solid rgb(170, 233, 0)";
-                button.style.boxShadow = "0 12px 12px black";
-            }, 1000);
+            // Обновляем интерфейс
+            scoreText.innerText = score;
+            addText.innerText = addPerClick;
+            sunsDiv.innerText = suns.toFixed(2);
+            checkBGImage();
+            
+            console.log('Игра загружена');
+            return true;
         }
-    }, 100);
+        console.log('Сохранение не найдено');
+        return false;
+    },
+    
+    // Функция для удаления сохранения
+    deleteSave: function() {
+        localStorage.removeItem('plantClickerSave');
+        console.log('Сохранение удалено');
+    },
+    
+    // Автосохранение каждые 30 секунд
+    initAutoSave: function() {
+        setInterval(() => {
+            this.saveGame();
+        }, 30000); // 30 секунд
+        
+        // Также сохраняем при закрытии вкладки/окна
+        window.addEventListener('beforeunload', () => {
+            this.saveGame();
+        });
+    }
 };
 
-button.onmouseup = function() {
-    isButtonPressed = false;
-};
-
-// Загружаем игру при старте
-window.addEventListener('load', loadGame);
-setInterval(saveGame, 30000);
+// Инициализация системы сохранений
+document.addEventListener('DOMContentLoaded', function() {
+    // Загружаем сохранение при запуске
+    saveSystem.loadGame();
+    
+    // Включаем автосохранение
+    saveSystem.initAutoSave();
+    
+    // Добавляем кнопки для ручного сохранения/загрузки (опционально)
+    const saveButton = document.createElement('button');
+    saveButton.textContent = 'Сохранить';
+    saveButton.onclick = saveSystem.saveGame.bind(saveSystem);
+    
+    const loadButton = document.createElement('button');
+    loadButton.textContent = 'Загрузить';
+    loadButton.onclick = saveSystem.loadGame.bind(saveSystem);
+    
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Удалить сохранение';
+    deleteButton.onclick = saveSystem.deleteSave.bind(saveSystem);
+    
+    document.body.appendChild(saveButton);
+    document.body.appendChild(loadButton);
+    document.body.appendChild(deleteButton);
+});

@@ -1,4 +1,4 @@
-'use
+'use script'
 const runnerConfig = {
     speed: 5,       // начальная скорость
     jumpForce: 12,  // высота прыжка

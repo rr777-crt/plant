@@ -23,7 +23,7 @@
             <div id="button">
             </div>
         </main>
-      
+            <footer>
             <p>за клики
                   <button onclick="getClickAdd(+100000000000000000000000, 0)">
                 <span>+100000000000000000000000 за клик(gjnjvexnj ntcn)
@@ -274,21 +274,9 @@
                 <button onclick="resetGame()" style="background-color: #ff4444; color: white;">
     Сбросить прогресс
 </button>
-  
-    </body>
-           <!-- Добавьте этот HTML перед закрывающим тегом </body> -->
-<footer id="game-footer" style="
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #333;
-    color: white;
-    padding: 10px;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
-    z-index: 1000;
-">
-    <h2 style="text-align: center; margin: 5px 0;">🛒 Магазин предметов</h2>
+       </button>
+                </span>
+                    <h2 style="text-align: center; margin: 5px 0;">🛒 Магазин предметов</h2>
     <div id="shop-items-container" style="
         display: flex;
         flex-wrap: wrap;
@@ -413,8 +401,100 @@ function createShop() {
         
         itemDiv.appendChild(itemName);
         itemDiv.appendChild(itemOwned);
-        itemDiv
+        itemDiv.appendChild(itemDesc);
+        itemDiv.appendChild(itemPrice);
+        itemDiv.appendChild(buyButton);
+        container.appendChild(itemDiv);
+    }
+}
+
+// Функция показа сообщения о покупке
+function showPurchaseMessage(text) {
+    const msg = document.createElement('div');
+    msg.textContent = text;
+    msg.style.position = 'fixed';
+    msg.style.bottom = '100px';
+    msg.style.left = '50%';
+    msg.style.transform = 'translateX(-50%)';
+    msg.style.backgroundColor = '#4CAF50';
+    msg.style.color = 'white';
+    msg.style.padding = '10px 20px';
+    msg.style.borderRadius = '5px';
+    msg.style.zIndex = '1001';
+    msg.style.animation = 'fadeOut 2s ease-out 1s forwards';
     
+    document.body.appendChild(msg);
+    
+    setTimeout(() => {
+        msg.remove();
+    }, 3000);
+}
+
+// Добавляем анимацию для сообщений
+const messageStyle = document.createElement('style');
+messageStyle.textContent = `
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    }
+`;
+document.head.appendChild(messageStyle);
+
+// Обновляем кнопки магазина при изменении валюты
+function updateShopButtons() {
+    const shopContainer = document.getElementById('shop-items-container');
+    if (shopContainer) {
+        const buttons = shopContainer.querySelectorAll('button');
+        buttons.forEach(button => {
+            const itemDiv = button.closest('.shop-item');
+            const itemName = itemDiv.querySelector('h3').textContent;
+            const item = Object.values(shopItems).find(i => i.name === itemName);
+            
+            if (item) {
+                const canAfford = item.priceType === 'drops' 
+                    ? score >= item.price 
+                    : suns >= item.price;
+                
+                button.disabled = !canAfford;
+                button.style.opacity = canAfford ? '1' : '0.7';
+            }
+        });
+    }
+}
+
+// Модифицируем функции getScore и getSuns для обновления магазина
+const originalGetScore = getScore;
+getScore = function(n) {
+    originalGetScore(n);
+    updateShopButtons();
+};
+
+const originalGetSuns = getSuns;
+getSuns = function(n) {
+    originalGetSuns(n);
+    updateShopButtons();
+};
+
+// Инициализация магазина при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+    // Сначала загружаем сохранение
+    saveSystem.loadGame();
+    
+    // Затем создаем магазин
+    createShop();
+    
+    // Обновляем кнопки
+    updateShopButtons();
+    
+    // Инициализируем автосохранение
+    saveSystem.initAutoSave();
+});
+</script>
+
+                </footer>
+    </body>
+           <!-- Добавьте этот HTML перед закрывающим тегом </body> -->
+
     <script src="./main.js"></script>
     <script src="./item.js"></script>
     <script src ="./save.js"></script>

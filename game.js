@@ -1,7 +1,7 @@
 'use script'
 const runnerConfig = {
     speed: 7,       // начальная скорость
-    jumpForce: 16,  // высота прыжка
+    jumpForce: 1,  // высота прыжка
     gravity: 0.7,   // гравитация
     rewardDrops: 10,// капли за секунду
     rewardSuns: 1,  // солнца за 10 секунд

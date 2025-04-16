@@ -291,3 +291,13 @@ saveSystem.loadRunnerGame = function() {
 
 // Обновляем при загрузке
 document.addEventListener('DOMContentLoaded', saveSystem.loadRunnerGame);
+function endRunnerGame() {
+    runnerGameActive = false;
+    
+    // 1. Удаляем ВСЕ препятствия
+    obstacles.forEach(obstacle => {
+        if (obstacle.element.parentNode) {
+            runnerContainer.removeChild(obstacle.element);
+        }
+    });
+    obstacles = []; // Очищаем ма

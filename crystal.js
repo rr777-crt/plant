@@ -69,8 +69,8 @@ const crystalDisplay = document.createElement('div');
 crystalDisplay.id = 'crystal-display';
 crystalDisplay.style.cssText = `
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 40px;
+    right: 240px;
     font-size: 24px;
     color: #00BCD4;
     text-shadow: 0 0 5px rgba(0,188,212,0.5);

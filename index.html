@@ -278,6 +278,144 @@
             
         </footer>
     </body>
+           <!-- Добавьте этот HTML перед закрывающим тегом </body> -->
+<footer id="game-footer" style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #333;
+    color: white;
+    padding: 10px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+">
+    <h2 style="text-align: center; margin: 5px 0;">🛒 Магазин предметов</h2>
+    <div id="shop-items-container" style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px;
+    "></div>
+</footer>
+
+<script>
+'use strict';
+
+// Стили для магазина
+const shopStyle = document.createElement('style');
+shopStyle.textContent = `
+    .shop-item {
+        background: #444;
+        border-radius: 8px;
+        padding: 10px;
+        width: 200px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .shop-item h3 {
+        margin: 0 0 5px 0;
+        color: #ffcc00;
+    }
+    .shop-item p {
+        margin: 5px 0;
+        font-size: 14px;
+    }
+    .shop-item button {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 5px;
+        width: 100%;
+    }
+    .shop-item button:disabled {
+        background: #555;
+        cursor: not-allowed;
+    }
+    .price-drops { color: #88f; }
+    .price-suns { color: #ffcc00; }
+`;
+document.head.appendChild(shopStyle);
+
+// Обновленная функция создания магазина
+function createShop() {
+    const container = document.getElementById('shop-items-container');
+    container.innerHTML = '';
+
+    for (const [key, item] of Object.entries(shopItems)) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'shop-item';
+        
+        const itemName = document.createElement('h3');
+        itemName.textContent = item.name;
+        
+        const itemOwned = document.createElement('p');
+        itemOwned.textContent = `Куплено: ${item.owned}`;
+        itemOwned.style.color = '#aaa';
+        
+        const itemDesc = document.createElement('p');
+        itemDesc.textContent = item.description;
+        
+        const itemPrice = document.createElement('p');
+        const priceType = item.priceType === 'drops' ? 'капель' : 'солнц';
+        const priceClass = item.priceType === 'drops' ? 'price-drops' : 'price-suns';
+        itemPrice.innerHTML = `Цена: <span class="${priceClass}">${item.price} ${priceType}</span>`;
+        
+        const buyButton = document.createElement('button');
+        buyButton.textContent = 'Купить';
+        
+        // Функция проверки возможности покупки
+        const canAfford = () => {
+            if (item.priceType === 'drops') {
+                return score >= item.price;
+            } else {
+                return suns >= item.price;
+            }
+        };
+        
+        // Обновление состояния кнопки
+        const updateButton = () => {
+            if (canAfford()) {
+                buyButton.disabled = false;
+                buyButton.style.opacity = '1';
+            } else {
+                buyButton.disabled = true;
+                buyButton.style.opacity = '0.7';
+            }
+            itemOwned.textContent = `Куплено: ${item.owned}`;
+        };
+        
+        updateButton();
+        
+        // Обработчик покупки
+        buyButton.onclick = function() {
+            if (canAfford()) {
+                // Списание валюты
+                if (item.priceType === 'drops') {
+                    getScore(-item.price);
+                } else {
+                    getSuns(-item.price);
+                }
+                
+                // Применение эффекта
+                item.effect();
+                item.owned++;
+                
+                // Сообщение о покупке
+                showPurchaseMessage(`Вы купили ${item.name}!`);
+                
+                // Обновление интерфейса
+                updateButton();
+                saveSystem.saveGame();
+            }
+        };
+        
+        itemDiv.appendChild(itemName);
+        itemDiv.appendChild(itemOwned);
+        itemDiv
     
     <script src="./main.js"></script>
     <script src="./item.js"></script>

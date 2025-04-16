@@ -5,7 +5,7 @@ const eliteConfig = {
         "bgm1": {
             name: "🌿 Природа",
             price: 5,
-            file: "music/nature.mp3",
+            file: "not.mp3",
             bought: false
         },
         "bgm2": {

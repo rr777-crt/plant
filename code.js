@@ -21,7 +21,7 @@ const promoCodes = {
 const promoContainer = document.createElement('div');
 promoContainer.style.position = 'fixed';
 promoContainer.style.top = '20px';
-promoContainer.style.right = '20px';
+promoContainer.style.left = '20px';
 promoContainer.style.zIndex = '1000';
 
 const promoInput = document.createElement('input');

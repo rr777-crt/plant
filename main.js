@@ -326,3 +326,206 @@ function resetGame() {
         button.style.backgroundImage = 'url(https://pvsz2.ru/statics/plants-big/68.png)';
     }
 }
+// ================ МАГАЗИН УЛУЧШЕНИЙ ================
+function createUpgradeShop() {
+    const shop = document.createElement('div');
+    shop.id = 'runner-upgrade-shop';
+    shop.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.9);
+        padding: 20px;
+        border-radius: 10px;
+        color: white;
+        z-index: 1005;
+        display: none;
+        width: 80%;
+        max-width: 500px;
+        max-height: 80vh;
+        overflow-y: auto;
+    `;
+
+    const title = document.createElement('h2');
+    title.textContent = '🏪 Улучшения мини-игры';
+    title.style.textAlign = 'center';
+    shop.appendChild(title);
+
+    // Кнопка закрытия
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = 'Закрыть';
+    closeBtn.onclick = () => shop.style.display = 'none';
+    closeBtn.style.cssText = `
+        display: block;
+        margin: 20px auto 0;
+        padding: 10px 20px;
+        background: #FF5722;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    `;
+
+    // Добавляем улучшения
+    Object.values(runnerUpgrades).forEach(upgrade => {
+        const item = document.createElement('div');
+        item.style.margin = '15px 0';
+        item.style.padding = '15px';
+        item.style.border = '1px solid #444';
+        item.style.borderRadius = '5px';
+
+        const name = document.createElement('h3');
+        name.textContent = upgrade.name;
+        name.style.margin = '0 0 10px 0';
+        name.style.color = upgrade.bought ? '#aaa' : '#FFD700';
+
+        const desc = document.createElement('p');
+        desc.textContent = upgrade.description;
+        desc.style.margin = '0 0 10px 0';
+        desc.style.color = '#ccc';
+
+        const price = document.createElement('p');
+        price.textContent = `Цена: ${upgrade.price} капель`;
+        price.style.margin = '0 0 10px 0';
+        price.style.color = upgrade.bought ? '#aaa' : '#88f';
+
+        const btn = document.createElement('button');
+        btn.textContent = upgrade.bought ? 'Куплено ✓' : 'Купить';
+        btn.disabled = upgrade.bought;
+        btn.style.cssText = `
+            padding: 8px 15px;
+            width: 100%;
+            background: ${upgrade.bought ? '#333' : '#4CAF50'};
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: ${upgrade.bought ? 'default' : 'pointer'};
+        `;
+
+        if (!upgrade.bought) {
+            btn.onclick = () => {
+                if (score >= upgrade.price) {
+                    getScore(-upgrade.price);
+                    upgrade.bought = true;
+                    upgrade.apply();
+                    btn.textContent = 'Куплено ✓';
+                    btn.disabled = true;
+                    btn.style.background = '#333';
+                    name.style.color = '#aaa';
+                    price.style.color = '#aaa';
+                    saveGame();
+                    showMessage(`Улучшение "${upgrade.name}" куплено!`);
+                } else {
+                    showMessage('Недостаточно капель!');
+                }
+            };
+        }
+
+        item.appendChild(name);
+        item.appendChild(desc);
+        item.appendChild(price);
+        item.appendChild(btn);
+        shop.appendChild(item);
+    });
+
+    shop.appendChild(closeBtn);
+    document.body.appendChild(shop);
+    return shop;
+}
+
+// Создаем магазин при загрузке
+let upgradeShop = null;
+document.addEventListener('DOMContentLoaded', () => {
+    upgradeShop = createUpgradeShop();
+    loadUpgrades();
+});
+
+// Кнопка для открытия магазина
+const upgradeShopBtn = document.createElement('button');
+upgradeShopBtn.textContent = 'Улучшения мини-игры';
+upgradeShopBtn.style.cssText = `
+    position: fixed;
+    bottom: 130px;
+    right: 20px;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #673AB7, #9C27B0);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+`;
+upgradeShopBtn.onclick = () => upgradeShop.style.display = 'block';
+document.body.appendChild(upgradeShopBtn);
+
+// ================ СОХРАНЕНИЕ УЛУЧШЕНИЙ ================
+function saveUpgrades() {
+    const upgradesData = {};
+    Object.keys(runnerUpgrades).forEach(key => {
+        upgradesData[key] = runnerUpgrades[key].bought;
+    });
+    localStorage.setItem('runnerUpgrades', JSON.stringify(upgradesData));
+}
+
+function loadUpgrades() {
+    const saved = localStorage.getItem('runnerUpgrades');
+    if (saved) {
+        const upgradesData = JSON.parse(saved);
+        Object.keys(upgradesData).forEach(key => {
+            if (runnerUpgrades[key] && upgradesData[key]) {
+                runnerUpgrades[key].bought = true;
+                runnerUpgrades[key].apply();
+            }
+        });
+    }
+}
+
+// Обновите функцию saveGame():
+function saveGame() {
+    const gameData = {
+        score: score,
+        addPerClick: addPerClick,
+        addPerSecond: addPerSecond,
+        suns: suns,
+        addSuns: addSuns,
+        backgroundImage: button.style.backgroundImage,
+        upgrades: {}
+    };
+    
+    Object.keys(runnerUpgrades).forEach(key => {
+        gameData.upgrades[key] = runnerUpgrades[key].bought;
+    });
+    
+    localStorage.setItem('grohostrelSave', JSON.stringify(gameData));
+}
+
+// Обновите функцию loadGame():
+function loadGame() {
+    const savedData = localStorage.getItem('grohostrelSave');
+    if (!savedData) return false;
+    
+    try {
+        const gameData = JSON.parse(savedData);
+        // ... существующий код загрузки ...
+        
+        // Загружаем улучшения
+        if (gameData.upgrades) {
+            Object.keys(gameData.upgrades).forEach(key => {
+                if (runnerUpgrades[key]) {
+                    runnerUpgrades[key].bought = gameData.upgrades[key];
+                    if (runnerUpgrades[key].bought) {
+                        runnerUpgrades[key].apply();
+                    }
+                }
+            });
+        }
+        
+        return true;
+    } catch (e) {
+        console.error('Ошибка загрузки сохранения:', e);
+        return false;
+    }
+}

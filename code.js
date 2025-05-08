@@ -19,7 +19,6 @@ const promoCodes = {
 
 // Создаем интерфейс для ввода кодов
 const promoContainer = document.createElement('div');
-promoContainer.style.position = 'fixed';
 promoContainer.style.top = '20px';
 promoContainer.style.left = '20px';
 promoContainer.style.zIndex = '1000';

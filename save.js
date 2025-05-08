@@ -1,87 +1,107 @@
 'use strict';
 
-// Добавляем переменные для системы удержания кнопки
-let buttonHoldTimer = null;
-let isButtonHeld = false;
-const HOLD_DURATION = 5000; // 5 секунд в миллисекундах
-const HOLD_MULTIPLIER = 3; // Множитель за удержание
-
-// Модифицируем обработчики кнопки
-button.onmousedown = function() {
-    // Запускаем таймер удержания
-    buttonHoldTimer = setTimeout(() => {
-        isButtonHeld = true;
-        console.log('Кнопка удержана 5 секунд - активирован множитель x3!');
-    }, HOLD_DURATION);
-};
-
-button.onmouseup = function() {
-    // Если таймер активен (не достигли 5 секунд), очищаем его
-    if (buttonHoldTimer) {
-        clearTimeout(buttonHoldTimer);
-        buttonHoldTimer = null;
-    }
+// Функция сохранения игры
+function saveGame() {
+    const gameData = {
+        score: score,
+        addPerClick: addPerClick,
+        addPerSecond: addPerSecond,
+        suns: suns,
+        addSuns: addSuns,
+        backgroundImage: button.style.backgroundImage || 'url(https://pvsz2.ru/statics/plants-big/68.png)'
+    };
     
-    // Если кнопка была удержана 5 секунд
-    if (isButtonHeld) {
-        // Даем бонус
-        const bonus = addPerClick * (HOLD_MULTIPLIER - 1); // Дополнительные 2x от базового
-        getScore(bonus);
-        getSuns(addSuns * (HOLD_MULTIPLIER - 1));
-        
-        // Показываем анимацию бонуса
-        showHoldBonus(bonus);
-        
-        // Сбрасываем флаг удержания
-        isButtonHeld = false;
-    }
-};
-
-// Обработчик для случая, когда курсор уходит с кнопки
-button.onmouseleave = function() {
-    if (buttonHoldTimer) {
-        clearTimeout(buttonHoldTimer);
-        buttonHoldTimer = null;
-    }
-    isButtonHeld = false;
-};
-
-// Функция для показа анимации бонуса
-function showHoldBonus(bonus) {
-    const bonusElement = document.createElement('div');
-    bonusElement.className = 'hold-bonus';
-    bonusElement.textContent = `+${bonus} (x3!)`;
-    bonusElement.style.position = 'absolute';
-    bonusElement.style.color = 'gold';
-    bonusElement.style.fontWeight = 'bold';
-    bonusElement.style.fontSize = '24px';
-    bonusElement.style.animation = 'floatUp 1.5s ease-out';
-    
-    // Позиционируем относительно кнопки
-    const buttonRect = button.getBoundingClientRect();
-    bonusElement.style.left = `${buttonRect.left + buttonRect.width/2 - 50}px`;
-    bonusElement.style.top = `${buttonRect.top - 20}px`;
-    
-    document.body.appendChild(bonusElement);
-    
-    // Удаляем элемент после анимации
-    setTimeout(() => {
-        bonusElement.remove();
-    }, 1500);
+    localStorage.setItem('grohostrelSave', JSON.stringify(gameData));
+    console.log('Игра сохранена');
 }
 
-// Добавляем CSS для анимации
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes floatUp {
-        0% {
-            transform: translateY(0);
-            opacity: 1;
+// Функция загрузки игры
+function loadGame() {
+    const savedData = localStorage.getItem('grohostrelSave');
+    if (!savedData) return false;
+    
+    try {
+        const gameData = JSON.parse(savedData);
+        
+        score = gameData.score || 0;
+        addPerClick = gameData.addPerClick || 1;
+        addPerSecond = gameData.addPerSecond || 0;
+        suns = gameData.suns || 0;
+        addSuns = gameData.addSuns || 0.01;
+        
+        // Обновляем отображение
+        scoreText.innerText = score;
+        addText.innerText = addPerClick;
+        sunsDiv.innerText = suns.toFixed(2);
+        
+        // Восстанавливаем фоновое изображение
+        if (gameData.backgroundImage) {
+            button.style.backgroundImage = gameData.backgroundImage;
         }
-        100% {
-            transform: translateY(-50px);
-            opacity: 0;
-        }
+        
+        console.log('Игра загружена');
+        return true;
+    } catch (e) {
+        console.error('Ошибка загрузки сохранения:', e);
+        return false;
     }
-`;
-document.head.appendChild(style);
+}
+
+// Автосохранение каждые 10 секунд
+setInterval(saveGame, 10000);
+
+// Загрузка при старте игры
+window.addEventListener('load', function() {
+    if (loadGame()) {
+        showMessage("Прогресс успешно загружен!");
+    }
+});
+
+// Сохранение при закрытии страницы
+window.addEventListener('beforeunload', function() {
+    saveGame();
+});
+
+// Функция для полного сброса сохранения
+function resetSave() {
+    localStorage.removeItem('grohostrelSave');
+    console.log('Сохранение сброшено');
+}
+
+// Интеграция с существующей функцией сброса
+function resetGame() {
+    if (confirm("Вы уверены, что хотите сбросить весь прогресс? Это удалит и сохранение.")) {
+        score = 0;
+        addPerClick = 1;
+        addPerSecond = 0;
+        suns = 0;
+        addSuns = 0.01;
+        
+        scoreText.innerText = score;
+        addText.innerText = addPerClick;
+        sunsDiv.innerText = suns.toFixed(2);
+        
+        button.style.backgroundImage = 'url(https://pvsz2.ru/statics/plants-big/68.png)';
+        
+        // Сбрасываем сохранение
+        resetSave();
+        
+        showMessage("Прогресс полностью сброшен!");
+    }
+}
+
+// Вспомогательная функция для показа сообщений (если ещё не определена)
+function showMessage(text) {
+    if (typeof window.showMessage === 'undefined') {
+        const message = document.createElement('div');
+        message.className = 'shop-message';
+        message.textContent = text;
+        document.body.appendChild(message);
+        
+        setTimeout(() => {
+            message.remove();
+        }, 3000);
+    } else {
+        window.showMessage(text);
+    }
+}

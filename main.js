@@ -1,4 +1,42 @@
 'use strict';
+const runnerUpgrades = {
+    speedBoost: {
+        name: "⚡ Скорость +2",
+        price: 500,
+        description: "Увеличивает базовую скорость в мини-игре",
+        bought: false,
+        apply: function() {
+            runnerConfig.speed += 2;
+        }
+    },
+    jumpBoost: {
+        name: "🦘 Прыжок +3",
+        price: 700,
+        description: "Увеличивает высоту прыжка",
+        bought: false,
+        apply: function() {
+            runnerConfig.jumpForce += 3;
+        }
+    },
+    invincibility: {
+        name: "🛡️ Чаще баффы",
+        price: 1200,
+        description: "Увеличивает шанс появления баффа неуязвимости",
+        bought: false,
+        apply: function() {
+            runnerConfig.buffs.invincible.chance *= 2;
+        }
+    },
+    cheaperGame: {
+        name: "💸 Скидка 50%",
+        price: 1500,
+        description: "Уменьшает стоимость запуска игры",
+        bought: false,
+        apply: function() {
+            runnerConfig.gameCost = Math.floor(runnerConfig.gameCost / 2);
+        }
+    }
+};
 
 const scoreText = document.getElementById("score");
 const addText = document.getElementById("add");

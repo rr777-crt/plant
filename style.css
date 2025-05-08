@@ -1,13 +1,11 @@
 body {
     margin: 0;
     padding: 0;
-
-    /**/
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Chrome/Safari/Opera */
-    -khtml-user-select: none; /* Konqueror */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 
@@ -16,7 +14,6 @@ header {
     height: 40px;
     text-align: center;
     font-size: 24px;
-
     position: fixed;
     top: 0;
     left: 0;
@@ -36,12 +33,11 @@ main {
     align-content: center;
     height: calc(100vh - 100px);
     width: 100vw;
-
 }
 
 #button {
     width: 250px;
-    height:  250px;
+    height: 250px;
     border-radius: 91%;
     background-image: url(https://pvsz2.ru/statics/plants-big/68.png);
     background-position: center;
@@ -51,34 +47,41 @@ main {
     border: 12px solid rgb(170, 233, 0);
     box-shadow: 0 12px 12px black;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 #button:active {
     filter: hue-rotate(49deg);
     transform: translateY(-7px);
-    
 }
 
 footer {
     background-color: green;
-    height: 100px;
+    height: auto;
     text-align: center;
     font-size: 100px;
+    padding: 20px 0;
 }
 
 footer button {
-     background-color:lightblue;
+    background-color: lightblue;
     margin-top: 20px;
     border-radius: 52px;
+    transition: transform 0.2s;
+}
+
+footer button:active {
+    transform: scale(0.95);
 }
 
 footer button span {
     display: block;
     font-size: 30px;
 }
-.groho{
+
+.groho {
     width: 460px;
-    height:  320px;
+    height: 320px;
     border-radius: 10%;
     background-image: url(https://pvsz2.ru/statics/plants-big/68.png);
     background-position: center;
@@ -95,7 +98,150 @@ footer button span {
     box-shadow: 0 12px 12px gold !important;
     transition: all 0.3s ease;
 }
-.menu{
+
+.menu {
     
 }
-    
+
+/* Стили для магазина */
+.shop-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    z-index: 1000;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    border: 3px solid gold;
+}
+
+.shop-container.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid green;
+    padding-bottom: 10px;
+}
+
+.close-shop {
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.shop-item {
+    background: #333;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #555;
+}
+
+.shop-item h3 {
+    margin: 0 0 5px 0;
+    color: gold;
+}
+
+.shop-item .price {
+    color: lightblue;
+    margin: 5px 0;
+}
+
+.shop-item button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.shop-item button:hover {
+    background: #45a049;
+}
+
+.shop-item button:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+/* Стили для зеленого шарика */
+.green-ball {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: lime;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 500;
+    animation: pulse 1s infinite alternate, float 3s ease-in-out infinite;
+    box-shadow: 0 0 15px lime;
+    transition: transform 0.2s;
+}
+
+.green-ball:active {
+    transform: scale(1.2);
+}
+
+@keyframes pulse {
+    from { transform: scale(1); box-shadow: 0 0 15px lime; }
+    to { transform: scale(1.1); box-shadow: 0 0 25px lime; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.shop-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px;
+    transition: all 0.3s;
+}
+
+.shop-btn:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}

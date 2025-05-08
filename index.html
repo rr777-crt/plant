@@ -76,8 +76,6 @@
                 5000000 капель</span>
             </button>
 
-           
-
             <button onclick="getClickAdd(200000,100000000)">
                 <span>+ 200000 за клик
                 100000000 капель</span>
@@ -106,7 +104,6 @@
                 <span>+ 100000000 за клик
                 100000000000000 капель</span>
                 </button>
-            </p>
 
             <button onclick="getClickAdd(10000000000,100000000000000000)">
                 <span>+ 10000000000 за клик
@@ -225,8 +222,6 @@
                 за 200 солнце
             </button>
 
-               
-
                   <button onclick="getScoreForSuns(1000000000000, 210)">
                 <span>+ 1000000000000 капель</span>
                 за 210 солнце
@@ -240,11 +235,6 @@
                 <span>+ 1000000000000000000000000000000000000000000000000000 капель</span>
                 за 10000 солнце
             </button>
-
-                
-               
-
-                 
               </p>
             
     <p>V:ТЕСТ 1.0.2.0</p>
@@ -259,10 +249,6 @@
             <p>ИГРА ОБЕЩАЕТ ЧТО СОЛНЫШКИ БУДУТ ДОВАТСЯ СЛОЖНО</p>
             <p>到目前为止，我是什么？?? 我正在获得力量，我只是给予一个简单的奖励，但我会达到最大值并摧毁E-T-O-T M-I-R</p>
              <p>
-
-
-
-               
                 <button onclick="getClickAdd(6666666666,66666666666)">
                 <span>:???:
        <button onclick="buyCase()" style="margin-top: 20px; padding: 10px; background-color: gold; border-radius: 10px;">
@@ -278,53 +264,21 @@
 </button>
        </button>
                 </span>
-                    <h2 style="text-align: center; margin: 5px 0;">🛒 Магазин предметов</h2>
-   
-                    <div id="shop-container"></div>
-                    <style>
-    .shop-item {
-        background: #333;
-        padding: 10px;
-        margin: 5px;
-        border-radius: 5px;
-    }
-    .shop-item h3 {
-        margin: 0 0 5px 0;
-        color: gold;
-    }
-    .shop-item .price {
-        color: lightblue;
-        margin: 5px 0;
-    }
-    .shop-item button {
-        background: #4CAF50;
-        color: white;
-        border: none;
-        padding: 5px;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-    .shop-item button:disabled {
-        background: #555;
-        cursor: not-allowed;
-    }
-    .shop-message {
-        position: fixed;
-        bottom: 20%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(0,0,0,0.7);
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        animation: fadeOut 2s ease-out 1s forwards;
-    }
-    @keyframes fadeOut {
-        to { opacity: 0; bottom: 25%; }
-    }
-</style>
-</footer>
+                <button onclick="toggleShop()" class="shop-btn">
+                    Открыть магазин
+                </button>
+            </p>
 
+            <!-- Оверлей и контейнер магазина -->
+            <div class="overlay" id="shopOverlay"></div>
+            <div class="shop-container" id="shopContainer">
+                <div class="shop-header">
+                    <h2>🛒 Магазин предметов</h2>
+                    <button class="close-shop" onclick="toggleShop()">×</button>
+                </div>
+                <div id="shop-content"></div>
+            </div>
+        </footer>
 
     <script src="./main.js"></script>
     <script src="./crystal.js"></script>
